@@ -5,19 +5,23 @@ const SONYA_GIF = 'http://reactmarathon-api.herokuapp.com/assets/sonya.gif'
 const SUBZERO_GIF = 'http://reactmarathon-api.herokuapp.com/assets/subzero.gif'
 
 const player1 = {
-  name: '',
-  hp: null,
-  img: '',
+  name: 'SCORPION',
+  hp: 85,
+  img: SCORPION_GIF,
   weapon: [],
-  attack: () => console.log(`${this.name} Fight`),
+  attack: function () {
+    console.log(`${this.name} Fight`)
+  },
 }
 
 const player2 = {
-  name: '',
-  hp: null,
-  img: '',
+  name: 'SUB-ZERO',
+  hp: 85,
+  img: SUBZERO_GIF,
   weapon: [],
-  attack: () => console.log(`${this.name} Fight`),
+  attack: function () {
+    console.log(`${this.name} Fight`)
+  },
 }
 
 const createElement = (elementName) => {
@@ -26,18 +30,18 @@ const createElement = (elementName) => {
   return $elem
 }
 
-const createPlayer = (player, charaacterName, hp, imgSrc) => {
+const createPlayer = (player, { name, hp, img }) => {
   const $player = createElement(player)
   const $progressbar = createElement('progressbar')
   const $character = createElement('character')
   const $life = createElement('life')
   $life.style.width = `${hp}%`
-  
+
   const $name = createElement('name')
-  $name.innerText = charaacterName
+  $name.innerText = name
 
   const $characterImg = document.createElement('img')
-  $characterImg.src = imgSrc
+  $characterImg.src = img
 
   $character.appendChild($characterImg)
   $progressbar.append($life, $name)
@@ -46,7 +50,5 @@ const createPlayer = (player, charaacterName, hp, imgSrc) => {
   document.querySelector('.arenas').appendChild($player)
 }
 
-createPlayer('player1', 'SCORPION', 50, SCORPION_GIF)
-createPlayer('player2', 'SUB-ZERO', 80, SUBZERO_GIF)
-
-
+createPlayer('player1', player1)
+createPlayer('player2', player2)
