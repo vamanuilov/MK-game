@@ -50,5 +50,11 @@ const createPlayer = (player, { name, hp, img }) => {
   document.querySelector('.arenas').appendChild($player)
 }
 
+const selectArena = () => {
+  const $arenas = document.querySelector('.arenas')
+  $arenas.classList += ` arena${Math.floor(Math.random() * 5) + 1}`
+}
+
 createPlayer('player1', player1)
 createPlayer('player2', player2)
+selectArena()
