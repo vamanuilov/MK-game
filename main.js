@@ -10,23 +10,23 @@ const $randomButton = document.querySelector('.control .button')
 
 const player1 = {
   player: 'player1',
-  name: 'SCORPION',
+  name: 'Scorpion',
   hp: 100,
   img: SCORPION_GIF,
   weapon: [],
-  attack: function () {
-    console.log(`${this.name} Fight`)
+  attack: function (damage) {
+    return `${this.name} hits with ${damage}`
   },
 }
 
 const player2 = {
   player: 'player2',
-  name: 'SUB-ZERO',
+  name: 'Sub-Zero',
   hp: 100,
   img: SUBZERO_GIF,
   weapon: [],
-  attack: function () {
-    console.log(`${this.name} Fight`)
+  attack: function (damage) {
+    return `${this.name} hits with ${damage}`
   },
 }
 
@@ -73,14 +73,17 @@ const playerWin = (name) => {
 
 const changeHP = (player) => {
   const $playerLife = document.querySelector(`.${player.player} .life`)
-  const hitPower = Math.ceil(Math.random() * 20)
+  const damage = Math.ceil(Math.random() * 20)
+  const $playerChat = document.querySelector(`.chat .${player.player}chat`)
+  const oppositePlayer = player.player === 'player1' ? player2 : player1
 
-  player.hp = player.hp - hitPower < 0 ? 0 : player.hp - hitPower
+  player.hp = player.hp - damage < 0 ? 0 : player.hp - damage
   $playerLife.style.width = `${player.hp}%`
+  $playerChat.innerHTML += `${player.attack(damage)} <br /> `
 
   if (player.hp === 0) {
     $randomButton.style.display = 'none'
-    playerWin(player.player === 'player1' ? player2.name : player1.name)
+    playerWin(oppositePlayer.name)
   }
 }
 
