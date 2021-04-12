@@ -58,11 +58,6 @@ const createElement = (tag, className) => {
   return $elem
 }
 
-const setLifeWidth = (lifeWidth) => {
-  const $life = document.querySelector('.life')
-  $life.style.width = `${lifeWidth}%`
-}
-
 const createPlayer = ({ player, name, hp, img }) => {
   const $player = createElement('div', player)
   const $progressbar = createElement('div', 'progressbar')
@@ -95,6 +90,19 @@ const playerWin = (name) => {
   $arenas.appendChild($winTitle)
 }
 
+const createReloadButton = () => {
+  $reloadWrap = createElement('div', 'reloadWrap')
+  $reloadButton = createElement('button', 'button')
+
+  $reloadButton.innerText = 'Restart'
+  $reloadButton.addEventListener('click', () => {
+    window.location.reload()
+  })
+  $reloadWrap.appendChild($reloadButton)
+
+  document.querySelector('.control').appendChild($reloadWrap)
+}
+
 const attack = (player) => {
   const damage = Math.ceil(Math.random() * 20)
   player.changeHP(damage)
@@ -107,6 +115,7 @@ $randomButton.addEventListener('click', () => {
 
   if (player1.hp === 0 || player2.hp === 0) {
     $randomButton.style.display = 'none'
+    createReloadButton()
   }
 
   if (player1.hp === 0 && player1.hp < player2.hp) {
