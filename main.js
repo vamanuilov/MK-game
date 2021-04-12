@@ -4,57 +4,92 @@ const LIUKANG_GIF = 'http://reactmarathon-api.herokuapp.com/assets/liukang.gif'
 const SONYA_GIF = 'http://reactmarathon-api.herokuapp.com/assets/sonya.gif'
 const SUBZERO_GIF = 'http://reactmarathon-api.herokuapp.com/assets/subzero.gif'
 
+const $arenas = document.querySelector('.arenas')
+$arenas.classList.add(`arena${Math.ceil(Math.random() * 5)}`)
+const $randomButton = document.querySelector('.control .button')
+
 const player1 = {
-  name: 'SCORPION',
-  hp: 85,
+  player: 'player1',
+  name: 'Scorpion',
+  hp: 100,
   img: SCORPION_GIF,
   weapon: [],
-  attack: function () {
-    console.log(`${this.name} Fight`)
+  attack: function (damage) {
+    return `${this.name} hits with ${damage}`
   },
 }
 
 const player2 = {
-  name: 'SUB-ZERO',
-  hp: 85,
+  player: 'player2',
+  name: 'Sub-Zero',
+  hp: 100,
   img: SUBZERO_GIF,
   weapon: [],
-  attack: function () {
-    console.log(`${this.name} Fight`)
+  attack: function (damage) {
+    return `${this.name} hits with ${damage}`
   },
 }
 
-const createElement = (elementName) => {
-  const $elem = document.createElement('div')
-  $elem.className = elementName
+const createElement = (tag, className) => {
+  const $elem = document.createElement(tag)
+
+  className && $elem.classList.add(className)
+
   return $elem
 }
 
-const createPlayer = (player, { name, hp, img }) => {
-  const $player = createElement(player)
-  const $progressbar = createElement('progressbar')
-  const $character = createElement('character')
-  const $life = createElement('life')
+const setLifeWidth = (lifeWidth) => {
+  const $life = document.querySelector('.life')
+  $life.style.width = `${lifeWidth}%`
+}
+
+const createPlayer = ({ player, name, hp, img }) => {
+  const $player = createElement('div', player)
+  const $progressbar = createElement('div', 'progressbar')
+  const $character = createElement('div', 'character')
+  const $life = createElement('div', 'life')
+  const $name = createElement('div', 'name')
+  const $characterImg = createElement('img')
+
   $life.style.width = `${hp}%`
-
-  const $name = createElement('name')
   $name.innerText = name
-
-  const $characterImg = document.createElement('img')
   $characterImg.src = img
+  $characterImg.alt = `${name} gif`
+
+  $progressbar.append($life, $name)
 
   $character.appendChild($characterImg)
-  $progressbar.append($life, $name)
+
   $player.append($progressbar, $character)
 
-  document.querySelector('.arenas').appendChild($player)
+  return $player
 }
 
-const selectArena = () => {
-  const $arenas = document.querySelector('.arenas')
-  $arenas.classList += ` arena${Math.floor(Math.random() * 5) + 1}`
+const playerWin = (name) => {
+  const $winTitle = createElement('div', 'winTitle')
+  $winTitle.innerText = `${name} wins`
+  $arenas.appendChild($winTitle)
 }
 
-createPlayer('player1', player1)
-createPlayer('player2', player2)
-selectArena()
+const changeHP = (player) => {
+  const $playerLife = document.querySelector(`.${player.player} .life`)
+  const damage = Math.ceil(Math.random() * 20)
+  const $playerChat = document.querySelector(`.chat .${player.player}chat`)
+  const oppositePlayer = player.player === 'player1' ? player2 : player1
+
+  player.hp = player.hp - damage < 0 ? 0 : player.hp - damage
+  $playerLife.style.width = `${player.hp}%`
+  $playerChat.innerHTML += `${player.attack(damage)} <br /> `
+
+  if (player.hp === 0) {
+    $randomButton.style.display = 'none'
+    playerWin(oppositePlayer.name)
+  }
+}
+
+$randomButton.addEventListener('click', () => {
+  changeHP(Math.floor(Math.random() * 2) ? player1 : player2)
+})
+
+$arenas.appendChild(createPlayer(player1))
+$arenas.appendChild(createPlayer(player2))
