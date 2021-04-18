@@ -141,6 +141,21 @@ const playerAttack = () => {
   return playerAttack
 }
 
+const showResult = () => {
+  if (player1.hp === 0 || player2.hp === 0) {
+    $formFight.style.display = 'none'
+    createReloadButton()
+  }
+
+  if (player1.hp === 0 && player1.hp < player2.hp) {
+    playerWin(player2.name)
+  } else if (player2.hp === 0 && player2.hp < player1.hp) {
+    playerWin(player1.name)
+  } else if (player1.hp === 0 && player2.hp === 0) {
+    playerWin()
+  }
+}
+
 $formFight.addEventListener('submit', (e) => {
   e.preventDefault()
   const enemy = enemyAttack()
@@ -155,18 +170,7 @@ $formFight.addEventListener('submit', (e) => {
     attack(player2, player.value)
   }
 
-  if (player1.hp === 0 || player2.hp === 0) {
-    $formFight.style.display = 'none'
-    createReloadButton()
-  }
-
-  if (player1.hp === 0 && player1.hp < player2.hp) {
-    playerWin(player2.name)
-  } else if (player2.hp === 0 && player2.hp < player1.hp) {
-    playerWin(player1.name)
-  } else if (player1.hp === 0 && player2.hp === 0) {
-    playerWin()
-  }
+  showResult()
 })
 
 $arenas.appendChild(createPlayer(player1))
