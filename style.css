@@ -284,27 +284,6 @@ body {
   text-shadow: 2px 2px 2px #cd0e03;
 }
 
-.chat {
-  color: white;
-  display: flex;
-}
-
-.chat .player1chat,
-.chat .player2chat {
-  width: 50%;
-  font-family: 'Mortal Kombat 4';
-  font-size: 1.3rem;
-}
-
-.player1chat {
-  padding-left: 7%;
-}
-
-.player2chat {
-  text-align: left;
-  padding-left: 15%;
-}
-
 .reloadWrap {
   position: absolute;
   top: 54px;
