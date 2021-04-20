@@ -1,8 +1,10 @@
 import generateLogs from './logs.js'
-import { getRandom, createReloadButton, createElement } from './utils.js'
+import { getRandom, createReloadButton, createElement, $arenas } from './utils.js'
 import { player1, player2 } from './players.js'
 
 const $formFight = document.querySelector('.control')
+
+setTimeout(() => $formFight.classList.remove('hide'), 2000)
 
 const HIT = {
   head: 30,
@@ -56,7 +58,7 @@ const playerWin = (name) => {
 
 const showResult = () => {
   if (player1.hp === 0 || player2.hp === 0) {
-    $formFight.style.display = 'none'
+    $formFight.classList.add('hide')
     createReloadButton()
   }
 
@@ -78,15 +80,15 @@ $formFight.addEventListener('submit', (e) => {
   const player = playerAttack()
 
   if (enemy.hit !== player.defence) {
-    generateLogs('hit', player1, player2, enemy.value)
     attack(player1, enemy.value)
+    generateLogs('hit', player1, player2, player1.hp)
   } else {
     generateLogs('defence', player2, player1)
   }
 
   if (player.hit !== enemy.defence) {
-    generateLogs('hit', player2, player1, player.value)
     attack(player2, player.value)
+    generateLogs('hit', player2, player1, player2.hp)
   } else {
     generateLogs('defence', player1, player2)
   }

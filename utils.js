@@ -1,3 +1,5 @@
+export const $arenas = document.querySelector('.arenas')
+
 export const pad = (value) => {
   return value < 10 ? `0${value}` : value
 }
@@ -13,8 +15,8 @@ export const createElement = (tag, className) => {
 }
 
 export const createReloadButton = () => {
-  $reloadWrap = createElement('div', 'reloadWrap')
-  $reloadButton = createElement('button', 'button')
+  const $reloadWrap = createElement('div', 'reloadWrap')
+  const $reloadButton = createElement('button', 'button')
 
   $reloadButton.innerText = 'Restart'
   $reloadButton.addEventListener('click', () => {

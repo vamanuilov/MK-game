@@ -1,9 +1,7 @@
 import generateLogs from './logs.js'
-import { getRandom } from './utils.js'
+import { getRandom, $arenas } from './utils.js'
 import { player1, player2, createPlayer } from './players.js'
 import './fight.js'
-
-const $arenas = document.querySelector('.arenas')
 
 $arenas.classList.add(`arena${getRandom(5)}`)
 

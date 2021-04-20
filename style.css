@@ -400,3 +400,32 @@ input[type='radio']:checked + label > span::before {
 input[type='radio']:checked + label > span:hover {
   background: none;
 }
+
+.log__player1 {
+  color: orange;
+  font-weight: bold;
+}
+
+.log__player2 {
+  color: rgb(0, 192, 192);
+  font-weight: bold;
+}
+
+.blockSpan {
+  color: rgb(206, 248, 53);
+  font-weight: bold
+}
+
+.hitSpan {
+  color: rgb(255, 65, 65);
+  font-weight: bold;
+}
+
+.damageSpan {
+  color: rgb(53, 248, 151);
+  font-weight: bold;
+}
+
+.hide {
+  display: none;
+}

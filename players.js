@@ -1,4 +1,4 @@
-import {createElement} from './utils.js'
+import { createElement } from './utils.js'
 
 const SCORPION_GIF = 'http://reactmarathon-api.herokuapp.com/assets/scorpion.gif'
 const KITANA_GIF = 'http://reactmarathon-api.herokuapp.com/assets/kitana.gif'
@@ -61,5 +61,3 @@ export const createPlayer = ({ player, name, hp, img }) => {
 
   return $player
 }
-
-
