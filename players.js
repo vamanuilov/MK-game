@@ -6,39 +6,40 @@ const LIUKANG_GIF = 'http://reactmarathon-api.herokuapp.com/assets/liukang.gif'
 const SONYA_GIF = 'http://reactmarathon-api.herokuapp.com/assets/sonya.gif'
 const SUBZERO_GIF = 'http://reactmarathon-api.herokuapp.com/assets/subzero.gif'
 
-function changeHP(damage) {
-  this.hp = this.hp - damage <= 0 ? 0 : this.hp - damage
+class Player {
+  constructor({ name, player, hp, img }) {
+    this.name = name
+    this.player = player
+    this.hp = hp
+    this.img = img
+  }
+
+  changeHP = (damage) => {
+    this.hp = this.hp - damage <= 0 ? 0 : this.hp - damage
+  }
+
+  elHP = () => {
+    return document.querySelector(`.${this.player} .life`)
+  }
+
+  renderHP = () => {
+    this.elHP().style.width = `${this.hp}%`
+  }
 }
 
-function elHP() {
-  return document.querySelector(`.${this.player} .life`)
-}
-
-function renderHP() {
-  this.elHP().style.width = `${this.hp}%`
-}
-
-export const player1 = {
+export const player1 = new Player({
   player: 'player1',
   name: 'Scorpion',
   hp: 100,
   img: SCORPION_GIF,
-  weapon: [],
-  changeHP,
-  elHP,
-  renderHP,
-}
+})
 
-export const player2 = {
+export const player2 = new Player({
   player: 'player2',
   name: 'Sub-Zero',
   hp: 100,
   img: SUBZERO_GIF,
-  weapon: [],
-  changeHP,
-  elHP,
-  renderHP,
-}
+})
 
 export const createPlayer = ({ player, name, hp, img }) => {
   const $player = createElement('div', player)
