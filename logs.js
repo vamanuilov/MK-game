@@ -1,3 +1,7 @@
+import { getRandom, pad } from './utils.js'
+
+const $chat = document.querySelector('.chat')
+
 const logs = {
   start: 'Часы показывали [time], когда [player1] и [player2] бросили вызов друг другу.',
   end: [
@@ -37,3 +41,42 @@ const logs = {
   ],
   draw: 'Ничья - это тоже победа!',
 }
+
+const generateLogs = (type, player1, player2, value) => {
+  let text = ''
+
+  switch (type) {
+    case 'start':
+      text = logs[type]
+        .replace('[player1]', player1.name)
+        .replace('[player2]', player2.name)
+        .replace('[time]', `${pad(new Date().getHours())}:${pad(new Date().getMinutes())}`)
+      break
+    case 'draw':
+      text = logs[type]
+      break
+    case 'hit':
+      text = logs[type][getRandom(logs[type].length - 1)]
+        .replace('[playerDefence]', player1.name)
+        .replace('[playerKick]', player2.name)
+      break
+    case 'defence':
+      text = logs[type][getRandom(logs[type].length - 1)]
+        .replace('[playerKick]', player1.name)
+        .replace('[playerDefence]', player2.name)
+      break
+    case 'end':
+      text = logs[type][getRandom(logs[type].length - 1)]
+        .replace('[playerWins]', player1.name)
+        .replace('[playerLose]', player2.name)
+      break
+    default:
+      text = 'Что-то пошло не так! :('
+      break
+  }
+
+  const el = `<p>${pad(new Date().getHours())}:${pad(new Date().getMinutes())} ${text} </p>`
+  $chat.insertAdjacentHTML('afterbegin', el)
+}
+
+export default generateLogs
