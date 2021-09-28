@@ -174,16 +174,17 @@ body {
 }
 
 .chat {
-  width: 786px;
+  width: 816px;
   height: 30vh;
   background: url(./assets/versus.png);
   background-size: cover;
   background-position: center;
   border-top: 4px solid #f5d100;
-  padding: 6px 40px;
+  padding: 6px 50px;
   overflow: overlay;
   color: white;
   font-family: Arial;
+  margin-right: -20px;
 }
 
 .character {
@@ -413,7 +414,7 @@ input[type='radio']:checked + label > span:hover {
 
 .blockSpan {
   color: rgb(206, 248, 53);
-  font-weight: bold
+  font-weight: bold;
 }
 
 .hitSpan {

@@ -57,19 +57,19 @@ const generateLogs = (type, player1, player2, value) => {
       break
     case 'hit':
       text = logs[type][getRandom(logs[type].length - 1)]
-        .replace('[playerDefence]', `<span class="log__player1">${player1.name}</span>`)
-        .replace('[playerKick]', `<span class="log__player2">${player2.name}</span>`)
+        .replace('[playerDefence]', `<span class="log__${player1.player}">${player1.name}</span>`)
+        .replace('[playerKick]', `<span class="log__${player2.player}">${player2.name}</span>`)
         .replace('[damage]', `<span class="damageSpan">[${value}/100]</span>`)
       break
     case 'defence':
       text = logs[type][getRandom(logs[type].length - 1)]
-        .replace('[playerKick]', `<span class="log__player1">${player1.name}</span>`)
-        .replace('[playerDefence]', `<span class="log__player2">${player2.name}</span>`)
+        .replace('[playerKick]', `<span class="log__${player1.player}">${player1.name}</span>`)
+        .replace('[playerDefence]', `<span class="log__${player2.player}">${player2.name}</span>`)
       break
     case 'end':
       text = logs[type][getRandom(logs[type].length - 1)]
-        .replace('[playerWins]', `<span class="log__player1">${player1.name}</span>`)
-        .replace('[playerLose]', `<span class="log__player2">${player2.name}</span>`)
+        .replace('[playerWins]', `<span class="log__${player1.player}">${player1.name}</span>`)
+        .replace('[playerLose]', `<span class="log__${player2.player}">${player2.name}</span>`)
       break
     default:
       text = 'Что-то пошло не так! :('
