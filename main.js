@@ -1,10 +1,6 @@
-import generateLogs from './logs.js'
-import { getRandom, $arenas } from './utils.js'
-import { player1, player2, createPlayer } from './players.js'
-import './fight.js'
+import Game from './game.js'
 
-$arenas.classList.add(`arena${getRandom(5)}`)
+const game = new Game()
 
-$arenas.appendChild(createPlayer(player1))
-$arenas.appendChild(createPlayer(player2))
-generateLogs('start', player1, player2)
+game.start()
+

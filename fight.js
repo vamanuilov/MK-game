@@ -1,9 +1,7 @@
 import generateLogs from './logs.js'
 import { getRandom, createReloadButton, createElement, $arenas } from './utils.js'
-import { player1, player2 } from './players.js'
 
 const $formFight = document.querySelector('.control')
-
 setTimeout(() => $formFight.classList.remove('hide'), 2000)
 
 const HIT = {
@@ -56,7 +54,7 @@ const playerWin = (name) => {
   $arenas.appendChild($winTitle)
 }
 
-const showResult = () => {
+const showResult = (player1, player2) => {
   if (player1.hp === 0 || player2.hp === 0) {
     $formFight.classList.add('hide')
     createReloadButton()
@@ -73,25 +71,27 @@ const showResult = () => {
   }
 }
 
-$formFight.addEventListener('submit', (e) => {
-  e.preventDefault()
+export const init = (player1, player2) => {
+  $formFight.addEventListener('submit', (e) => {
+    e.preventDefault()
 
-  const enemy = enemyAttack()
-  const player = playerAttack()
+    const enemy = enemyAttack()
+    const player = playerAttack()
 
-  if (enemy.hit !== player.defence) {
-    attack(player1, enemy.value)
-    generateLogs('hit', player1, player2, player1.hp)
-  } else {
-    generateLogs('defence', player2, player1)
-  }
+    if (enemy.hit !== player.defence) {
+      attack(player1, enemy.value)
+      generateLogs('hit', player1, player2, player1.hp)
+    } else {
+      generateLogs('defence', player2, player1)
+    }
 
-  if (player.hit !== enemy.defence) {
-    attack(player2, player.value)
-    generateLogs('hit', player2, player1, player2.hp)
-  } else {
-    generateLogs('defence', player1, player2)
-  }
+    if (player.hit !== enemy.defence) {
+      attack(player2, player.value)
+      generateLogs('hit', player2, player1, player2.hp)
+    } else {
+      generateLogs('defence', player1, player2)
+    }
 
-  showResult()
-})
+    showResult(player1, player2)
+  })
+}
