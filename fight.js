@@ -67,6 +67,7 @@ const showResult = (player1, player2) => {
     playerWin(player1.name)
     generateLogs('end', player1, player2)
   } else if (player1.hp === 0 && player2.hp === 0) {
+    playerWin()
     generateLogs('draw')
   }
 }
