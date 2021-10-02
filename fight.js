@@ -2,7 +2,7 @@ import generateLogs from './logs.js'
 import { getRandom, createReloadButton, createElement, $arenas } from './utils.js'
 
 const $formFight = document.querySelector('.control')
-setTimeout(() => $formFight.classList.remove('hide'), 2000)
+
 
 const HIT = {
   head: 30,
@@ -56,7 +56,7 @@ const playerWin = (name) => {
 
 const showResult = (player1, player2) => {
   if (player1.hp === 0 || player2.hp === 0) {
-    $formFight.classList.add('hide')
+    $formFight.classList.add('hidden')
     createReloadButton()
   }
 
@@ -73,6 +73,8 @@ const showResult = (player1, player2) => {
 }
 
 export const init = (player1, player2) => {
+  setTimeout(() => $formFight.classList.remove('hidden'), 2000)
+  
   $formFight.addEventListener('submit', (e) => {
     e.preventDefault()
 
